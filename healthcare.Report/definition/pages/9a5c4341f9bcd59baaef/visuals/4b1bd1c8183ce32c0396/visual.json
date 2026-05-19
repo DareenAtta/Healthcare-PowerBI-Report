@@ -1,0 +1,38 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.7.0/schema.json",
+  "name": "4b1bd1c8183ce32c0396",
+  "position": {
+    "x": 1180,
+    "y": 460,
+    "z": 8,
+    "height": 220,
+    "width": 200,
+    "tabOrder": 8
+  },
+  "visual": {
+    "visualType": "slicer",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Sheet1"
+                    }
+                  },
+                  "Property": "Department Referral"
+                }
+              },
+              "queryRef": "Sheet1.Department Referral",
+              "nativeQueryRef": "Department Referral"
+            }
+          ]
+        }
+      }
+    },
+    "drillFilterOtherVisuals": true
+  }
+}
