@@ -13,6 +13,8 @@ A collection of Power BI reports built on real healthcare datasets, covering pat
 #### Page 1 — Executive Summary
 High-level KPIs and trends for hospital leadership.
 
+![Executive Summary](01-Patient-Analytics/screenshots/Executive%20Summary.png)
+
 | Visual | Description |
 |---|---|
 | KPI Card | Total Patients |
@@ -25,6 +27,8 @@ High-level KPIs and trends for hospital leadership.
 #### Page 2 — Patient Demographics
 Breakdown of the patient population by personal characteristics.
 
+![Patient Demographics](01-Patient-Analytics/screenshots/patient%20demographics.png)
+
 | Visual | Description |
 |---|---|
 | Bar Chart | Patients by Race |
@@ -34,6 +38,8 @@ Breakdown of the patient population by personal characteristics.
 
 #### Page 3 — Operations & Performance
 Operational metrics to identify bottlenecks and performance gaps.
+
+![Operations & Performance](01-Patient-Analytics/screenshots/operation%20%26%20Performance.png)
 
 | Visual | Description |
 |---|---|
