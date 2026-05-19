@@ -1,6 +1,22 @@
 # Healthcare Power BI Projects
 
-A collection of Power BI reports built on real healthcare datasets, covering patient analytics, operational performance, and clinical insights.
+## About This Repository
+
+This repository contains a series of **5 interactive Power BI dashboards** built on real-world healthcare datasets. Each project focuses on a different aspect of healthcare analytics — from patient flow and satisfaction to hospital finance, clinical operations, staff performance, and equipment utilization.
+
+The goal of this project is to demonstrate how data analytics can support smarter decision-making in healthcare environments, helping hospital administrators, clinical leads, and operations teams quickly identify trends, monitor KPIs, and act on insights.
+
+### What You Will Find Here
+- **Clean, well-structured Power BI projects** saved in the open `.pbip` format for full version control
+- **DAX measures** built from scratch with proper handling of missing data
+- **Multi-page reports** with consistent slicers and a professional dark navy theme
+- **Git-tracked history** so every change to the report is documented
+
+### Tech Stack
+- Power BI Desktop (PBIP format)
+- DAX (Data Analysis Expressions)
+- Power Query
+- Git & GitHub for version control
 
 ---
 
