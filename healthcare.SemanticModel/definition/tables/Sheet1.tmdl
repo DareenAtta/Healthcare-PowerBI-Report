@@ -1,0 +1,148 @@
+table Sheet1
+	lineageTag: 8d9f71d2-7cbf-4a63-9925-73d0e32e0cdf
+
+	/// Total number of patient visits
+	measure 'Total Patients' = COUNTROWS(Sheet1)
+		formatString: #,##0
+		lineageTag: 38eda6cc-3028-403b-933c-349c9adfa6ee
+
+	/// Average patient wait time in minutes
+	measure 'Avg Wait Time' = AVERAGE(Sheet1[Wait Time (mins)])
+		formatString: #,##0.0 mins
+		lineageTag: 0cdc3d94-0b9b-46e1-a067-2a0ab78c48f8
+
+	/// Average satisfaction score (excludes patients with no score)
+	measure 'Avg Satisfaction Score' = AVERAGEX(FILTER(Sheet1, NOT ISBLANK(Sheet1[Satisfaction Score])), Sheet1[Satisfaction Score])
+		formatString: #,##0.0
+		lineageTag: eff991fb-d044-4750-8633-015da054e57a
+
+	/// Percentage of patients who were admitted
+	measure '% Admitted' = DIVIDE(COUNTROWS(FILTER(Sheet1, Sheet1[Admitted] = TRUE())), COUNTROWS(Sheet1))
+		formatString: 0.0%
+		lineageTag: 8cfcb68c-3ef6-42a6-8803-65c8dd781048
+
+	/// Number of patients who submitted a satisfaction score
+	measure 'Patients Rated' = COUNTROWS(FILTER(Sheet1, NOT ISBLANK(Sheet1[Satisfaction Score])))
+		formatString: #,##0
+		lineageTag: dd067e41-b914-4d4f-a30d-1133059e4957
+
+	/// Average age of patients
+	measure 'Avg Patient Age' = AVERAGE(Sheet1[Patient Age])
+		formatString: #,##0.0
+		lineageTag: a50dcdba-0ba6-406d-8934-9896dbdbd36f
+
+	column date
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 9f8198af-964f-4eb6-ac68-2a7f3885597e
+		summarizeBy: none
+		sourceColumn: date
+
+		variation Variation
+			isDefault
+			relationship: 95415c64-2976-4750-b490-7fde9199ce86
+			defaultHierarchy: LocalDateTable_87a29e84-6cf2-4d4e-abb7-81a40466f531.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column 'Patient ID'
+		dataType: string
+		lineageTag: b36a1c61-50ca-4e97-90dd-8a008d265497
+		summarizeBy: none
+		sourceColumn: patient_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Patient Gender'
+		dataType: string
+		lineageTag: 071604b2-5e46-4566-85be-f6ed7b21b6b8
+		summarizeBy: none
+		sourceColumn: patient_gender
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Patient Age'
+		dataType: int64
+		formatString: 0
+		lineageTag: ab8d5fe0-a846-43ea-878d-2d7185cb69c2
+		summarizeBy: sum
+		sourceColumn: patient_age
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Satisfaction Score'
+		dataType: int64
+		formatString: 0
+		lineageTag: 8d20ce7f-4c39-45b7-8447-115d0232a4e9
+		summarizeBy: sum
+		sourceColumn: patient_sat_score
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Full Name'
+		dataType: string
+		lineageTag: d8e8a5ce-a637-4897-8810-69d71f769a03
+		summarizeBy: none
+		sourceColumn: "Full Name "
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Patient Race'
+		dataType: string
+		lineageTag: 8855865a-5c8d-4b30-bc14-d862d7878162
+		summarizeBy: none
+		sourceColumn: patient_race
+
+		annotation SummarizationSetBy = Automatic
+
+	column Admitted
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 2dfde053-79f4-4988-86b6-469b3af5d4f2
+		summarizeBy: none
+		sourceColumn: patient_admin_flag
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Wait Time (mins)'
+		dataType: int64
+		formatString: 0
+		lineageTag: d2234b07-b5e3-42d6-97fc-25eccc9f3dac
+		summarizeBy: sum
+		sourceColumn: patient_waittime
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Department Referral'
+		dataType: string
+		lineageTag: 69aa898c-1ec0-4222-8ffa-2501b97ada95
+		summarizeBy: none
+		sourceColumn: department_referral
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Visit Shift'
+		dataType: string
+		lineageTag: 2eb54384-6613-4063-9551-2aa740d7a307
+		summarizeBy: none
+		sourceColumn: Moment
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Sheet1 = m
+		mode: import
+		source =
+				let
+				    Source = Excel.Workbook(File.Contents("C:\Users\HP\Desktop\Healthcare dataset.xlsx"), null, true),
+				    Sheet1_Sheet = Source{[Item="Sheet1",Kind="Sheet"]}[Data],
+				    #"Promoted Headers" = Table.PromoteHeaders(Sheet1_Sheet, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"date", type date}, {"patient_id", type text}, {"patient_gender", type text}, {"patient_age", Int64.Type}, {"patient_sat_score", Int64.Type}, {"Full Name ", type text}, {"patient_race", type text}, {"patient_admin_flag", type logical}, {"patient_waittime", Int64.Type}, {"department_referral", type text}, {"Moment", type text}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
