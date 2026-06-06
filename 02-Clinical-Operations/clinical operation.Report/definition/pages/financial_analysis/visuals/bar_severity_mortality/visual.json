@@ -1,0 +1,57 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.7.0/schema.json",
+  "name": "bar_severity_mortality",
+  "position": {
+    "x": 640,
+    "y": 140,
+    "z": 4,
+    "height": 270,
+    "width": 620,
+    "tabOrder": 4
+  },
+  "visual": {
+    "visualType": "barChart",
+    "query": {
+      "queryState": {
+        "Category": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "hospital_inpatient_discharges_totalhipreplacement"
+                    }
+                  },
+                  "Property": "Health Service Area"
+                }
+              },
+              "queryRef": "hospital_inpatient_discharges_totalhipreplacement.Health Service Area",
+              "nativeQueryRef": "Health Service Area",
+              "active": true
+            }
+          ]
+        },
+        "Y": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "hospital_inpatient_discharges_totalhipreplacement"
+                    }
+                  },
+                  "Property": "% High Severity"
+                }
+              },
+              "queryRef": "hospital_inpatient_discharges_totalhipreplacement.% High Severity",
+              "nativeQueryRef": "% High Severity"
+            }
+          ]
+        }
+      }
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

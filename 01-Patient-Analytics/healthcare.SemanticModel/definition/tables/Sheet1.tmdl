@@ -31,6 +31,16 @@ table Sheet1
 		formatString: #,##0.0
 		lineageTag: a50dcdba-0ba6-406d-8934-9896dbdbd36f
 
+	/// Count of distinct department referrals
+	measure 'Number of Departments' = DISTINCTCOUNT(Sheet1[Department Referral])
+		formatString: #,##0
+		lineageTag: a1b2c3d4-e5f6-7890-abcd-ef1234567800
+
+	/// Rate of patients scoring satisfaction below 5 out of 10
+	measure 'Low Satisfaction %' = DIVIDE(COUNTROWS(FILTER(Sheet1, Sheet1[Satisfaction Score] < 5 && NOT ISBLANK(Sheet1[Satisfaction Score]))), [Patients Rated])
+		formatString: 0.0%
+		lineageTag: b2c3d4e5-f6a7-8901-bcde-f12345678901
+
 	column date
 		dataType: dateTime
 		formatString: Long Date
@@ -128,6 +138,23 @@ table Sheet1
 		lineageTag: 2eb54384-6613-4063-9551-2aa740d7a307
 		summarizeBy: none
 		sourceColumn: Moment
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Age Group'
+		dataType: string
+		lineageTag: c3d4e5f6-a7b8-9012-cdef-123456789012
+		summarizeBy: none
+		expression =
+				SWITCH(
+				    TRUE(),
+				    Sheet1[Patient Age] < 18, "0-17",
+				    Sheet1[Patient Age] < 30, "18-29",
+				    Sheet1[Patient Age] < 45, "30-44",
+				    Sheet1[Patient Age] < 60, "45-59",
+				    Sheet1[Patient Age] < 75, "60-74",
+				    "75+"
+				)
 
 		annotation SummarizationSetBy = Automatic
 

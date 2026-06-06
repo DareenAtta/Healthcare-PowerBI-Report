@@ -1,0 +1,310 @@
+table hospital_inpatient_discharges_totalhipreplacement
+	lineageTag: b0f2a866-6735-47af-89d4-9e588bfd47e9
+
+	measure 'Total Patients' = COUNTROWS(hospital_inpatient_discharges_totalhipreplacement)
+		formatString: #,##0
+
+	measure 'Avg Length of Stay' = AVERAGE(hospital_inpatient_discharges_totalhipreplacement[Length of Stay])
+		formatString: #,##0.0 "days"
+
+	measure 'Avg Total Charges' = AVERAGE(hospital_inpatient_discharges_totalhipreplacement[Total Charges])
+		formatString: $#,##0
+
+	measure 'Avg Total Costs' = AVERAGE(hospital_inpatient_discharges_totalhipreplacement[Total Costs])
+		formatString: $#,##0
+
+	measure 'Cost to Charge Ratio' = DIVIDE(AVERAGE(hospital_inpatient_discharges_totalhipreplacement[Total Costs]), AVERAGE(hospital_inpatient_discharges_totalhipreplacement[Total Charges]))
+		formatString: 0.00%
+
+	measure '% High Severity' =
+			DIVIDE(
+			    COUNTROWS(FILTER(hospital_inpatient_discharges_totalhipreplacement, hospital_inpatient_discharges_totalhipreplacement[Severity of Illness] = "Major" || hospital_inpatient_discharges_totalhipreplacement[Severity of Illness] = "Extreme")),
+			    COUNTROWS(hospital_inpatient_discharges_totalhipreplacement)
+			)
+		formatString: 0.0%
+
+	measure '% High Mortality Risk' =
+			DIVIDE(
+			    COUNTROWS(FILTER(hospital_inpatient_discharges_totalhipreplacement, hospital_inpatient_discharges_totalhipreplacement[Risk of Mortality] = "Major" || hospital_inpatient_discharges_totalhipreplacement[Risk of Mortality] = "Extreme")),
+			    COUNTROWS(hospital_inpatient_discharges_totalhipreplacement)
+			)
+		formatString: 0.0%
+
+	column 'Health Service Area'
+		dataType: string
+		lineageTag: ebff9635-ae92-4b1b-8f3f-12863fb25835
+		summarizeBy: none
+		sourceColumn: health_service_area
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Hospital County'
+		dataType: string
+		lineageTag: 306382d9-c3c2-4fa5-ae80-909174c85b89
+		summarizeBy: none
+		sourceColumn: hospital_county
+
+		annotation SummarizationSetBy = Automatic
+
+	column operating_certificate_number
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 1348463a-1277-4946-8efd-8cbf0f0d4727
+		summarizeBy: none
+		sourceColumn: operating_certificate_number
+
+		annotation SummarizationSetBy = Automatic
+
+	column facility_id
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: f48c71c7-aae5-4811-bad5-2021c207595b
+		summarizeBy: none
+		sourceColumn: facility_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Facility Name'
+		dataType: string
+		lineageTag: 511497b6-5544-4a1f-a210-ad577725416c
+		summarizeBy: none
+		sourceColumn: facility_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Age Group'
+		dataType: string
+		lineageTag: 338dd4f2-ea0f-4658-b239-d90d97faafde
+		summarizeBy: none
+		sourceColumn: age_group
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Zip Code'
+		dataType: string
+		lineageTag: fd343923-2281-44e7-8a70-ce53744974e5
+		summarizeBy: none
+		sourceColumn: zip_code_3_digits
+
+		annotation SummarizationSetBy = Automatic
+
+	column Gender
+		dataType: string
+		lineageTag: 70ca09f0-1376-4f22-ae6c-4146f08dde33
+		summarizeBy: none
+		sourceColumn: gender
+
+		annotation SummarizationSetBy = Automatic
+
+	column Race
+		dataType: string
+		lineageTag: 993660f1-2e18-446f-ae70-f5e43a4392ed
+		summarizeBy: none
+		sourceColumn: race
+
+		annotation SummarizationSetBy = Automatic
+
+	column Ethnicity
+		dataType: string
+		lineageTag: 8c413456-84ef-43c4-b804-d581a3278bcc
+		summarizeBy: none
+		sourceColumn: ethnicity
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Length of Stay'
+		dataType: int64
+		formatString: 0
+		lineageTag: eb285612-baac-46f4-b631-ed3b2a1e27f4
+		summarizeBy: sum
+		sourceColumn: length_of_stay
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Admission Type'
+		dataType: string
+		lineageTag: 1d37be8f-ed87-4239-a514-a9dccaacadb0
+		summarizeBy: none
+		sourceColumn: type_of_admission
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Patient Disposition'
+		dataType: string
+		lineageTag: c41e0d6e-c4fd-491e-b00a-ae907c93e2e4
+		summarizeBy: none
+		sourceColumn: patient_disposition
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Discharge Year'
+		dataType: int64
+		formatString: 0
+		lineageTag: 7e67941b-d06c-4d86-907d-b42c4e7d1213
+		summarizeBy: none
+		sourceColumn: discharge_year
+
+		annotation SummarizationSetBy = Automatic
+
+	column ccs_diagnosis_code
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 3cc36ed3-662f-4a86-a303-e20e1303ea5c
+		summarizeBy: none
+		sourceColumn: ccs_diagnosis_code
+
+		annotation SummarizationSetBy = Automatic
+
+	column Diagnosis
+		dataType: string
+		lineageTag: aab78a03-108c-4770-9bf7-5026ea3da1e7
+		summarizeBy: none
+		sourceColumn: ccs_diagnosis_description
+
+		annotation SummarizationSetBy = Automatic
+
+	column ccs_procedure_code
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 220803e1-c31a-4fb4-9404-c25beb0d7f9a
+		summarizeBy: none
+		sourceColumn: ccs_procedure_code
+
+		annotation SummarizationSetBy = Automatic
+
+	column Procedure
+		dataType: string
+		lineageTag: 28d441b4-375d-4f14-8092-7ca9bfddf654
+		summarizeBy: none
+		sourceColumn: ccs_procedure_description
+
+		annotation SummarizationSetBy = Automatic
+
+	column apr_drg_code
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: f2bd02d5-a7b4-4452-92f7-14a96f069408
+		summarizeBy: none
+		sourceColumn: apr_drg_code
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'DRG Description'
+		dataType: string
+		lineageTag: c162a318-2d93-40b6-83f8-3a6efd90c7b5
+		summarizeBy: none
+		sourceColumn: apr_drg_description
+
+		annotation SummarizationSetBy = Automatic
+
+	column apr_mdc_code
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: a77fa3a9-592d-40dd-b0ba-0c598b83f420
+		summarizeBy: none
+		sourceColumn: apr_mdc_code
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'MDC Description'
+		dataType: string
+		lineageTag: 3476eb95-93aa-4777-a4c2-8c4d0fc1d942
+		summarizeBy: none
+		sourceColumn: apr_mdc_description
+
+		annotation SummarizationSetBy = Automatic
+
+	column apr_severity_of_illness_code
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 88e2fa78-0792-4fe4-b9ce-c08cb6f72dd6
+		summarizeBy: none
+		sourceColumn: apr_severity_of_illness_code
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Severity of Illness'
+		dataType: string
+		lineageTag: 69598a8f-87de-4f0c-b65d-277794ba056e
+		summarizeBy: none
+		sourceColumn: apr_severity_of_illness_description
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Risk of Mortality'
+		dataType: string
+		lineageTag: b5cc06b0-28aa-49b8-90d3-bf2259329512
+		summarizeBy: none
+		sourceColumn: apr_risk_of_mortality
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Medical Surgical Type'
+		dataType: string
+		lineageTag: 3f64b278-b21d-4e9e-98f7-931ec844aa13
+		summarizeBy: none
+		sourceColumn: apr_medical_surgical_description
+
+		annotation SummarizationSetBy = Automatic
+
+	column attending_provider_license_number
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 512319d4-2595-4d00-8ce3-6f1459d8d1e6
+		summarizeBy: none
+		sourceColumn: attending_provider_license_number
+
+		annotation SummarizationSetBy = Automatic
+
+	column operating_provider_license_number
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 580955cf-9768-469c-8ee0-63acea86250e
+		summarizeBy: none
+		sourceColumn: operating_provider_license_number
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Total Charges'
+		dataType: double
+		lineageTag: ea590794-b170-4873-8e8c-ffdb8502f72d
+		summarizeBy: sum
+		sourceColumn: total_charges
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Total Costs'
+		dataType: double
+		lineageTag: 8df6322a-7137-4b14-878d-0c5cf3c774cf
+		summarizeBy: sum
+		sourceColumn: total_costs
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition hospital_inpatient_discharges_totalhipreplacement = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents("C:\Users\HP\Desktop\Power Bi Demo\02-Clinical-Operations\hospital_inpatient_discharges_totalhipreplacement.csv"),[Delimiter=",", Columns=30, Encoding=1252, QuoteStyle=QuoteStyle.None]),
+				    #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"health_service_area", type text}, {"hospital_county", type text}, {"operating_certificate_number", Int64.Type}, {"facility_id", Int64.Type}, {"facility_name", type text}, {"age_group", type text}, {"zip_code_3_digits", type text}, {"gender", type text}, {"race", type text}, {"ethnicity", type text}, {"length_of_stay", Int64.Type}, {"type_of_admission", type text}, {"patient_disposition", type text}, {"discharge_year", Int64.Type}, {"ccs_diagnosis_code", Int64.Type}, {"ccs_diagnosis_description", type text}, {"ccs_procedure_code", Int64.Type}, {"ccs_procedure_description", type text}, {"apr_drg_code", Int64.Type}, {"apr_drg_description", type text}, {"apr_mdc_code", Int64.Type}, {"apr_mdc_description", type text}, {"apr_severity_of_illness_code", Int64.Type}, {"apr_severity_of_illness_description", type text}, {"apr_risk_of_mortality", type text}, {"apr_medical_surgical_description", type text}, {"attending_provider_license_number", Int64.Type}, {"operating_provider_license_number", Int64.Type}, {"total_charges", type number}, {"total_costs", type number}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
