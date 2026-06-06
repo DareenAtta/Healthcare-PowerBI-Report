@@ -1,0 +1,57 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.7.0/schema.json",
+  "name": "donut_gender",
+  "position": {
+    "x": 20,
+    "y": 20,
+    "z": 0,
+    "height": 280,
+    "width": 300,
+    "tabOrder": 0
+  },
+  "visual": {
+    "visualType": "donutChart",
+    "query": {
+      "queryState": {
+        "Category": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "hospital_inpatient_discharges_totalhipreplacement"
+                    }
+                  },
+                  "Property": "Gender"
+                }
+              },
+              "queryRef": "hospital_inpatient_discharges_totalhipreplacement.Gender",
+              "nativeQueryRef": "Gender",
+              "active": true
+            }
+          ]
+        },
+        "Y": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "hospital_inpatient_discharges_totalhipreplacement"
+                    }
+                  },
+                  "Property": "Total Patients"
+                }
+              },
+              "queryRef": "hospital_inpatient_discharges_totalhipreplacement.Total Patients",
+              "nativeQueryRef": "Total Patients"
+            }
+          ]
+        }
+      }
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

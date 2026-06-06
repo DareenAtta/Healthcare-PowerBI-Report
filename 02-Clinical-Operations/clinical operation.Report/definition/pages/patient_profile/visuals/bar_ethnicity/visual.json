@@ -1,0 +1,57 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.7.0/schema.json",
+  "name": "bar_ethnicity",
+  "position": {
+    "x": 780,
+    "y": 20,
+    "z": 2,
+    "height": 280,
+    "width": 480,
+    "tabOrder": 2
+  },
+  "visual": {
+    "visualType": "barChart",
+    "query": {
+      "queryState": {
+        "Category": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "hospital_inpatient_discharges_totalhipreplacement"
+                    }
+                  },
+                  "Property": "Ethnicity"
+                }
+              },
+              "queryRef": "hospital_inpatient_discharges_totalhipreplacement.Ethnicity",
+              "nativeQueryRef": "Ethnicity",
+              "active": true
+            }
+          ]
+        },
+        "Y": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "hospital_inpatient_discharges_totalhipreplacement"
+                    }
+                  },
+                  "Property": "Total Patients"
+                }
+              },
+              "queryRef": "hospital_inpatient_discharges_totalhipreplacement.Total Patients",
+              "nativeQueryRef": "Total Patients"
+            }
+          ]
+        }
+      }
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

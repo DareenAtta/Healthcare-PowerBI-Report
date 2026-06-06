@@ -1,0 +1,57 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.7.0/schema.json",
+  "name": "bar_charges_facility",
+  "position": {
+    "x": 20,
+    "y": 140,
+    "z": 3,
+    "height": 270,
+    "width": 600,
+    "tabOrder": 3
+  },
+  "visual": {
+    "visualType": "barChart",
+    "query": {
+      "queryState": {
+        "Category": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "hospital_inpatient_discharges_totalhipreplacement"
+                    }
+                  },
+                  "Property": "Facility Name"
+                }
+              },
+              "queryRef": "hospital_inpatient_discharges_totalhipreplacement.Facility Name",
+              "nativeQueryRef": "Facility Name",
+              "active": true
+            }
+          ]
+        },
+        "Y": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "hospital_inpatient_discharges_totalhipreplacement"
+                    }
+                  },
+                  "Property": "Avg Total Charges"
+                }
+              },
+              "queryRef": "hospital_inpatient_discharges_totalhipreplacement.Avg Total Charges",
+              "nativeQueryRef": "Avg Total Charges"
+            }
+          ]
+        }
+      }
+    },
+    "drillFilterOtherVisuals": true
+  }
+}
