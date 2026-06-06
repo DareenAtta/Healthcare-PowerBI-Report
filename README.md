@@ -104,6 +104,6 @@ Operational metrics to identify bottlenecks and performance gaps.
 |---|---|---|
 | 01 | Patient Analytics | Done |
 | 02 | Hospital Finance | Coming soon |
-| 03 | Clinical Operations | Coming soon |
+| 03 | Clinical Operations | Done |
 | 04 | Staff Performance | Coming soon |
 | 05 | Equipment Utilization | Coming soon |
